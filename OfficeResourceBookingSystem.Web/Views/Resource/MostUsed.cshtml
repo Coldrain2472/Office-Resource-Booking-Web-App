@@ -1,0 +1,37 @@
+﻿@using OfficeResourceBookingSystem.Web.Models.Resource
+@model MostUsedResourceViewModel
+
+@{
+    ViewData["Title"] = "Most Used Resources";
+}
+
+<div class="container py-4">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (Model.ResourceStatistics.Any())
+    {
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Resource Type</th>
+                    <th>Usage Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var stat in Model.ResourceStatistics)
+                {
+                    <tr>
+                        <td>@stat.Key</td>
+                        <td>@stat.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No data available.</div>
+    }
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Resources</a>
+</div>

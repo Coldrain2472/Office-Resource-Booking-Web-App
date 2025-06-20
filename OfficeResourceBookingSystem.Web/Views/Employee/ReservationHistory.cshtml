@@ -1,0 +1,57 @@
+﻿@using OfficeResourceBookingSystem.Web.Models.Employee
+@model ReservationHistoryPerEmployeeViewModel
+
+@{
+    ViewData["Title"] = "Reservation History";
+}
+
+<div class="container py-4">
+    <h2>Reservation History for @Model.EmployeeName</h2>
+    <p class="text-muted">Total Reservations: @Model.TotalCount</p>
+
+    @if (Model.Reservations != null && Model.Reservations.Any())
+    {
+        <table class="table table-striped table-bordered mt-3">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Purpose</th>
+                    <th>Participants</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Active</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var res in Model.Reservations)
+                {
+                    <tr>
+                        <td>@res.ReservationId</td>
+                        <td>@res.Purpose</td>
+                        <td>@res.ParticipantsCount</td>
+                        <td>@res.StartTime.ToString("g")</td>
+                        <td>@res.EndTime.ToString("g")</td>
+                        <td>
+                            @if (res.IsActive)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">No</span>
+                            }
+                        </td>
+                        <td>@res.CreatedAt.ToString("g")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No reservations found for this employee.</div>
+    }
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Employee List</a>
+</div>

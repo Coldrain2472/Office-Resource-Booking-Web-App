@@ -1,0 +1,24 @@
+﻿@using OfficeResourceBookingSystem.Web.Models.Employee
+@model ChangeNameViewModel
+
+@{
+    ViewData["Title"] = "Change Name";
+}
+
+<div class="container py-4">
+    <h2>Change Name</h2>
+    <form asp-action="ChangeName" method="post">
+        <input type="hidden" asp-for="EmployeeId" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Name</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

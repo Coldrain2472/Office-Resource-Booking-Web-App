@@ -1,0 +1,37 @@
+﻿@using OfficeResourceBookingSystem.Web.Models.Resource
+@model ResourceUsageReportViewModel
+
+@{
+    ViewData["Title"] = "Resource Usage Report";
+}
+
+<div class="container py-4">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (Model.ResourceUsages.Any())
+    {
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Resource Name</th>
+                    <th>Times Used</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usage in Model.ResourceUsages)
+                {
+                    <tr>
+                        <td>@usage.Key</td>
+                        <td>@usage.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No usage data available.</div>
+    }
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Resources</a>
+</div>
